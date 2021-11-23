@@ -22,6 +22,7 @@ public class Warhead : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        transform.position = collision.GetContact(0).point;
         Destroy(Instantiate(ExplosionVFX, transform.position, Quaternion.identity), 3);
         TrailVFX.transform.parent = null;
         TrailVFX.GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
