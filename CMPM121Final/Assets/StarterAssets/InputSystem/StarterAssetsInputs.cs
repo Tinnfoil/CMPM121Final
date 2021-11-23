@@ -13,7 +13,6 @@ namespace StarterAssets
         public Vector2 look;
         public bool jump;
         public bool sprint;
-        public bool grapple;
 
         [Header("Movement Settings")]
         public bool analogMovement;
@@ -23,6 +22,8 @@ namespace StarterAssets
         public bool cursorLocked = true;
         public bool cursorInputForLook = true;
 #endif
+		public Action OnGrappleButton;
+		public Action OnGrappleRelease;
         public Action OnRocketButton;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
@@ -51,7 +52,8 @@ namespace StarterAssets
 
         public void OnGrapple(InputValue value)
         {
-            GrappleInput(value.isPressed);
+            if (value.isPressed) OnGrappleButton?.Invoke();
+			else OnGrappleRelease?.Invoke();
         }
 
         public void OnRocket(InputValue value)
@@ -81,11 +83,6 @@ namespace StarterAssets
         public void SprintInput(bool newSprintState)
         {
             sprint = newSprintState;
-        }
-
-        public void GrappleInput(bool newGrappleState)
-        {
-            grapple = newGrappleState;
         }
 
 #if !UNITY_IOS || !UNITY_ANDROID

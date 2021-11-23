@@ -54,6 +54,11 @@ namespace StarterAssets
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
 
+		// grapple
+		public bool GrappleReady = true;
+		public bool GrappleOut = false;
+		public bool GrappleAttached = false;
+
 		// cinemachine
 		private float _cinemachineTargetPitch;
 
@@ -90,6 +95,10 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+
+			// grapple input actions
+			_input.OnGrappleButton += ShootGrapple;
+			_input.OnGrappleRelease += ReleaseGrapple;
 		}
 
 		private void Update()
@@ -223,6 +232,21 @@ namespace StarterAssets
 			{
 				_verticalVelocity += Gravity * Time.deltaTime;
 			}
+		}
+
+		private void ShootGrapple() {
+			if (GrappleReady) {
+				Debug.Log("Shoot Grapple");
+				GrappleReady = false;
+				GrappleOut = true;
+			}
+		}
+
+		private void ReleaseGrapple() {
+			Debug.Log("Release Grapple");
+			GrappleOut = false;
+			GrappleAttached = false;
+			GrappleReady = true;
 		}
 
 		private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
