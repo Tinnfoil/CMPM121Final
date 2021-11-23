@@ -212,6 +212,9 @@ MonoBehaviour:
   CinemachineCameraTarget: {fileID: 4135013735270702863}
   TopClamp: 90
   BottomClamp: -90
+  GrappleReady: 1
+  GrappleOut: 0
+  GrappleAttached: 0
 --- !u!114 &1978471637655604388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,7 +248,6 @@ MonoBehaviour:
   look: {x: 0, y: 0}
   jump: 0
   sprint: 0
-  grapple: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
@@ -261,6 +263,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f154aed49fa00245b0b0954d430936e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WarheadPrefab: {fileID: 4415564061245526691, guid: 8686b1f532eaea44992d19a6a8e391ea, type: 3}
+  WarheadTransform: {fileID: 3391066368185554387}
+  cooldown: 0.25
 --- !u!114 &8616685848737228376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,7 +377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2c6b5fbbc6b065d468a4e5a040467445, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.69
+      value: 0.644
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2c6b5fbbc6b065d468a4e5a040467445, type: 3}
       propertyPath: m_LocalPosition.y
@@ -414,6 +419,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Launcher
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2c6b5fbbc6b065d468a4e5a040467445, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5958658578803215465, guid: 2c6b5fbbc6b065d468a4e5a040467445, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6617906843433135783, guid: 2c6b5fbbc6b065d468a4e5a040467445, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6617906843433135783, guid: 2c6b5fbbc6b065d468a4e5a040467445, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -423,5 +440,10 @@ PrefabInstance:
 --- !u!4 &4455580899062330841 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2c6b5fbbc6b065d468a4e5a040467445, type: 3}
+  m_PrefabInstance: {fileID: 4206324968849232434}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3391066368185554387 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1535906284357027809, guid: 2c6b5fbbc6b065d468a4e5a040467445, type: 3}
   m_PrefabInstance: {fileID: 4206324968849232434}
   m_PrefabAsset: {fileID: 0}
