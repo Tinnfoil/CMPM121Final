@@ -212,6 +212,9 @@ MonoBehaviour:
   CinemachineCameraTarget: {fileID: 4135013735270702863}
   TopClamp: 90
   BottomClamp: -90
+  GrappleReady: 1
+  GrappleOut: 0
+  GrappleAttached: 0
 --- !u!114 &1978471637655604388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,7 +248,6 @@ MonoBehaviour:
   look: {x: 0, y: 0}
   jump: 0
   sprint: 0
-  grapple: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
@@ -263,6 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WarheadPrefab: {fileID: 4415564061245526691, guid: 8686b1f532eaea44992d19a6a8e391ea, type: 3}
   WarheadTransform: {fileID: 3391066368185554387}
+  cooldown: 0.25
 --- !u!114 &8616685848737228376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,7 +377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2c6b5fbbc6b065d468a4e5a040467445, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.69
+      value: 0.644
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2c6b5fbbc6b065d468a4e5a040467445, type: 3}
       propertyPath: m_LocalPosition.y
