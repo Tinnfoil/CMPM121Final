@@ -19,6 +19,12 @@ public class WarheadExplosion : MonoBehaviour
         explosionSphere.transform.localScale = new Vector3(0, 0, 0);
         LeanTween.scale(explosionSphere, new Vector3(4, 4, 4), .1f);
         LeanTween.alpha(explosionSphere, 0, .2f);
+        Invoke("DisableSelf", .2f);
+    }
+
+    public void DisableSelf()
+    {
+        enabled = false;
     }
 
     // Update is called once per frame
@@ -32,6 +38,11 @@ public class WarheadExplosion : MonoBehaviour
         if (!hitTargets.Contains(other.gameObject))
         {
             hitTargets.Add(other.gameObject);
+            if (other.GetComponentInParent<FirstPersonController>())
+            {
+                other.GetComponentInParent<FirstPersonController>().AddImpact(other.transform.position - transform.position, 30f);
+                other.GetComponentInParent<FirstPersonController>()._verticalVelocity = 2;
+            }
             // Add force to this target
         }
     }
