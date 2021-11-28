@@ -33,8 +33,10 @@ public class RocketLauncherController : MonoBehaviour
         if (!reloading)
         {
             Vector3 direction = CalculateFireDirection();
-            GameObject warhead = Instantiate(WarheadPrefab, WarheadTransform.position - direction, Quaternion.LookRotation(direction, Vector3.up));
-            warhead.GetComponent<Rigidbody>().AddForce(direction * 100, ForceMode.Impulse);
+            //GameObject warhead = Instantiate(WarheadPrefab, WarheadTransform.position - direction, Quaternion.LookRotation(direction, Vector3.up));
+            GameObject warhead = Instantiate(WarheadPrefab, Camera.main.transform.position, Quaternion.LookRotation(direction, Vector3.up));
+            warhead.GetComponent<Warhead>().InitializedWarhead(WarheadTransform.position - direction, Quaternion.LookRotation(direction, Vector3.up), direction * 60);
+            warhead.GetComponent<Rigidbody>().AddForce(direction * 60, ForceMode.Impulse);
             WarheadTransform.gameObject.SetActive(false);
             Invoke("ReloadRocket", .25f);
         }
@@ -52,12 +54,11 @@ public class RocketLauncherController : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        bool detectedObject = Physics.Raycast(ray, out hit, 30, ~0, QueryTriggerInteraction.Ignore);
+        bool detectedObject = Physics.Raycast(ray, out hit, 50, ~0, QueryTriggerInteraction.Ignore);
         Vector3 direction = Camera.main.transform.forward;
         if (detectedObject)
         {
-            direction = (hit.point - WarheadTransform.position).normalized;
-            direction = Vector3.Lerp(Camera.main.transform.forward, direction, Mathf.Clamp(hit.distance * 4, 4, 30) / 30f);
+            direction = (hit.point - Camera.main.transform.position).normalized;
         }
         else
         {

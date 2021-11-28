@@ -124,7 +124,7 @@ public class FirstPersonController : MonoBehaviour
     private void FixedUpdate()
     {
         //JumpAndGravity();
-       // GroundedCheck();
+        // GroundedCheck();
         //Move();
     }
 
@@ -176,19 +176,13 @@ public class FirstPersonController : MonoBehaviour
         float speedOffset = 0.1f;
         float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
 
-        // accelerate or decelerate to target speed
-        if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset)
+        if (inputMagnitude > 0)
         {
-            // creates curved result rather than a linear one giving a more organic speed change
-            // note T in Lerp is clamped, so we don't need to clamp our speed
-            _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude, Time.deltaTime * SpeedChangeRate);
-
-            // round speed to 3 decimal places
-            _speed = Mathf.Round(_speed * 1000f) / 1000f;
+            _speed = Mathf.Lerp(_speed, targetSpeed, SpeedChangeRate * Time.deltaTime);
         }
         else
         {
-            _speed = targetSpeed;
+            _speed = Mathf.Lerp(_speed, 0, SpeedChangeRate * Time.deltaTime);
         }
 
         // normalise input direction
@@ -235,7 +229,7 @@ public class FirstPersonController : MonoBehaviour
                 _jumpTimeoutDelta -= Time.deltaTime;
             }
 
-            impact = Vector3.zero ;
+            impact = Vector3.zero;
 
         }
         else

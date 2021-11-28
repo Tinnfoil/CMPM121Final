@@ -19,7 +19,7 @@ public class WarheadExplosion : MonoBehaviour
         explosionSphere.transform.localScale = new Vector3(0, 0, 0);
         LeanTween.scale(explosionSphere, new Vector3(4, 4, 4), .1f);
         LeanTween.alpha(explosionSphere, 0, .2f);
-        Invoke("DisableSelf", .2f);
+        Invoke("DisableSelf", Time.deltaTime);
     }
 
     public void DisableSelf()
@@ -35,12 +35,13 @@ public class WarheadExplosion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!hitTargets.Contains(other.gameObject))
+        if (!hitTargets.Contains(other.gameObject.transform.root.gameObject))
         {
-            hitTargets.Add(other.gameObject);
+            hitTargets.Add(other.gameObject.transform.root.gameObject);
             if (other.GetComponentInParent<FirstPersonController>())
             {
-                other.GetComponentInParent<FirstPersonController>().AddImpact(other.transform.position - transform.position, 30f);
+                other.GetComponentInParent<FirstPersonController>().AddImpact((other.transform.position - transform.position).normalized, 30f);
+                other.GetComponentInParent<FirstPersonController>().Grounded = false;
                 other.GetComponentInParent<FirstPersonController>()._verticalVelocity = 2;
             }
             // Add force to this target
