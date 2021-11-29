@@ -39,9 +39,9 @@
                 },
                 {
                     "name": "Grapple",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "52e1a81f-097d-43ff-859c-8062b02365fd",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
                 },
