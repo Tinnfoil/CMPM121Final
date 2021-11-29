@@ -6,6 +6,7 @@ public class WarheadExplosion : MonoBehaviour
 {
     public List<GameObject> hitTargets;
     public GameObject explosionSphere;
+    private bool effecting = true;
 
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class WarheadExplosion : MonoBehaviour
     public void DisableSelf()
     {
         enabled = false;
+        effecting = false;
     }
 
     // Update is called once per frame
@@ -35,7 +37,7 @@ public class WarheadExplosion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!hitTargets.Contains(other.gameObject.transform.root.gameObject))
+        if (!hitTargets.Contains(other.gameObject.transform.root.gameObject) && effecting)
         {
             hitTargets.Add(other.gameObject.transform.root.gameObject);
             if (other.GetComponentInParent<FirstPersonController>())

@@ -416,6 +416,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6140292382799175997, guid: 2c6b5fbbc6b065d468a4e5a040467445, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2c6b5fbbc6b065d468a4e5a040467445, type: 3}
       propertyPath: m_Name
       value: Launcher
@@ -435,6 +439,10 @@ PrefabInstance:
     - target: {fileID: 6617906843433135783, guid: 2c6b5fbbc6b065d468a4e5a040467445, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6688249156389499458, guid: 2c6b5fbbc6b065d468a4e5a040467445, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c6b5fbbc6b065d468a4e5a040467445, type: 3}
