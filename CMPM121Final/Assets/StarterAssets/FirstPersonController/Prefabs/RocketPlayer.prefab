@@ -200,7 +200,7 @@ MonoBehaviour:
   RotationSpeed: 1
   SpeedChangeRate: 10
   JumpHeight: 1.2
-  Gravity: -15
+  Gravity: -9.8
   JumpTimeout: 0.1
   FallTimeout: 0.15
   Grounded: 1
@@ -210,8 +210,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 513
   CinemachineCameraTarget: {fileID: 4135013735270702863}
-  TopClamp: 90
-  BottomClamp: -90
+  TopClamp: 89.9
+  BottomClamp: -89.9
   GrappleReady: 1
   GrappleOut: 0
   GrappleAttached: 0
