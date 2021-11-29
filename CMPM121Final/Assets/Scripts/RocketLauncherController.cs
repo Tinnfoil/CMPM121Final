@@ -52,6 +52,7 @@ public class RocketLauncherController : MonoBehaviour
 
     public Vector3 CalculateFireDirection()
     {
+        // Comment
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         bool detectedObject = Physics.Raycast(ray, out hit, 50, ~0, QueryTriggerInteraction.Ignore);
