@@ -67,6 +67,9 @@ namespace StarterAssets
 
 		public Vector3 ExternalForce;
 
+		public GameObject GrappleHook;
+		public GameObject GrappleCable;
+
 		// cinemachine
 		private float _cinemachineTargetPitch;
 
@@ -114,11 +117,23 @@ namespace StarterAssets
 		{
 			JumpAndGravity();
 			GroundedCheck();
+
+			drag = Grounded ? 10.0f : 6.0f;
+
 			DoGrapple();
 			Move();
 
 			if (GrappleAttached) {
 				Debug.DrawRay(transform.position, GrapplePoint - transform.position, Color.green, 0);
+				GrappleCable.SetActive(true);
+				GrappleHook.SetActive(false);
+
+				GrappleCable.transform.localScale = new Vector3(1, 1, Vector3.Magnitude(GrapplePoint - GrappleCable.transform.position));
+				GrappleCable.transform.LookAt(GrapplePoint, Vector3.up);
+
+			} else {
+				GrappleCable.SetActive(false);
+				GrappleHook.SetActive(true);
 			}
 		}
 
@@ -201,7 +216,7 @@ namespace StarterAssets
 			// move the player
 			if (!GrappleAttached) {
 				// normal movement
-				_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+				_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime + GrappleForce * Time.deltaTime);
 			} else {
 				// movement when grappled
 				_controller.Move(GrappleForce * Time.deltaTime);
@@ -285,8 +300,14 @@ namespace StarterAssets
 		}
 
 		private void DoGrapple() {
-			if (GrappleAttached && Vector3.Magnitude(GrapplePoint - transform.position) >= 1.0f) {
+			if (GrappleAttached) {
 				Vector3 direction = GrapplePoint - transform.position;
+
+				if (direction.magnitude < 0.5f) {
+					GrappleForce = Vector3.zero;
+					return;
+				}
+
 				direction.Normalize();
 				GrappleForce +=  Time.deltaTime * direction.normalized * GrappleStrength / 3.0f;
 
