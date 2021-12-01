@@ -283,7 +283,7 @@ namespace StarterAssets
 				GrappleOut = true;
 
 				RaycastHit hit;
-				if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out hit, Mathf.Infinity)) {
+				if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out hit, 20.0f)) {
 					GrapplePoint = hit.point;
 					GrappleAttached = true;
 					Debug.Log(hit.point);
