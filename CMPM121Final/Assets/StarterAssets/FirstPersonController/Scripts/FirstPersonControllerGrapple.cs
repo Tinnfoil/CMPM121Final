@@ -24,6 +24,8 @@ namespace StarterAssets
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
 
+		public float drag;
+
 		[Space(10)]
 		[Tooltip("The height the player can jump")]
 		public float JumpHeight = 1.2f;
@@ -61,6 +63,9 @@ namespace StarterAssets
 		public bool GrappleAttached = false;
 
 		public Vector3 GrapplePoint;
+		public Vector3 GrappleForce;
+
+		public Vector3 ExternalForce;
 
 		// cinemachine
 		private float _cinemachineTargetPitch;
@@ -109,8 +114,12 @@ namespace StarterAssets
 		{
 			JumpAndGravity();
 			GroundedCheck();
-			Move();
 			DoGrapple();
+			Move();
+
+			if (GrappleAttached) {
+				Debug.DrawRay(transform.position, GrapplePoint - transform.position, Color.green, 0);
+			}
 		}
 
 		private void LateUpdate()
@@ -187,8 +196,19 @@ namespace StarterAssets
 				inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
 			}
 
+			if (GrappleAttached) _verticalVelocity = 0.0f;
+
 			// move the player
-			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+			if (!GrappleAttached) {
+				// normal movement
+				_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+			} else {
+				// movement when grappled
+				_controller.Move(GrappleForce * Time.deltaTime);
+			}
+
+			// depletes grapple force every frame
+			if (!GrappleAttached) GrappleForce = Vector3.MoveTowards(GrappleForce, Vector3.zero, drag * Time.deltaTime);
 		}
 
 		private void JumpAndGravity()
@@ -233,7 +253,7 @@ namespace StarterAssets
 			}
 
 			// apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
-			if (_verticalVelocity < _terminalVelocity)
+			if (_verticalVelocity < _terminalVelocity && !GrappleAttached)
 			{
 				_verticalVelocity += Gravity * Time.deltaTime;
 			}
@@ -253,8 +273,6 @@ namespace StarterAssets
 					GrappleAttached = true;
 					Debug.Log(hit.point);
 				}
-
-				// Debug.Log(hit.point);
 			}
 		}
 
@@ -267,14 +285,14 @@ namespace StarterAssets
 		}
 
 		private void DoGrapple() {
-
-			if (GrappleAttached) {
-				Debug.Log("Grapple Pull");
-				// pull player to attachment point
-				// GetComponent<Rigidbody>().AddForce(transform.forward * GrappleStrength);
-				// Debug.Log(_controller.attachedRigidbody);
+			if (GrappleAttached && Vector3.Magnitude(GrapplePoint - transform.position) >= 1.0f) {
 				Vector3 direction = GrapplePoint - transform.position;
-				
+				direction.Normalize();
+				GrappleForce +=  Time.deltaTime * direction.normalized * GrappleStrength / 3.0f;
+
+				if (GrappleForce.magnitude > 10f) {
+					GrappleForce = GrappleForce.normalized * 10f;
+				}
 			}
 		}
 

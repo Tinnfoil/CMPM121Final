@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 11445640}
   - component: {fileID: 11445639}
   - component: {fileID: 11445638}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1569,7 +1569,7 @@ GameObject:
   - component: {fileID: 5420857361758844456}
   - component: {fileID: 8616685849421326936}
   m_Layer: 8
-  m_Name: PlayerCapsule
+  m_Name: GrapplePlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1591,6 +1591,7 @@ MonoBehaviour:
   SprintSpeed: 6
   RotationSpeed: 1
   SpeedChangeRate: 10
+  drag: 3
   JumpHeight: 1.2
   Gravity: -15
   JumpTimeout: 0.1
@@ -1604,11 +1605,13 @@ MonoBehaviour:
   CinemachineCameraTarget: {fileID: 4135013735952634639}
   TopClamp: 90
   BottomClamp: -90
-  GrappleStrength: 10
+  GrappleStrength: 100
   GrappleReady: 1
   GrappleOut: 0
   GrappleAttached: 0
   GrapplePoint: {x: 0, y: 0, z: 0}
+  GrappleForce: {x: 0, y: 0, z: 0}
+  ExternalForce: {x: 0, y: 0, z: 0}
 --- !u!114 &8616685849421326936
 MonoBehaviour:
   m_ObjectHideFlags: 0
