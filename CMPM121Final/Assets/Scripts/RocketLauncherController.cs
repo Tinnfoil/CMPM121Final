@@ -38,7 +38,7 @@ public class RocketLauncherController : MonoBehaviour
             warhead.GetComponent<Warhead>().InitializedWarhead(WarheadTransform.position - direction, Quaternion.LookRotation(direction, Vector3.up), direction * 60);
             warhead.GetComponent<Rigidbody>().AddForce(direction * 60, ForceMode.Impulse);
             WarheadTransform.gameObject.SetActive(false);
-            Invoke("ReloadRocket", .25f);
+            Invoke("ReloadRocket", cooldown);
         }
         reloading = true;
     }

@@ -42,9 +42,19 @@ public class WarheadExplosion : MonoBehaviour
             hitTargets.Add(other.gameObject.transform.root.gameObject);
             if (other.GetComponentInParent<FirstPersonController>())
             {
-                other.GetComponentInParent<FirstPersonController>().AddImpact((other.transform.position - transform.position).normalized, 30f);
-                other.GetComponentInParent<FirstPersonController>().Grounded = false;
-                other.GetComponentInParent<FirstPersonController>()._verticalVelocity = 2;
+                FirstPersonController controller = other.GetComponentInParent<FirstPersonController>();
+                if (controller.Grounded)
+                {
+                    controller._verticalVelocity = Mathf.Sqrt(controller.JumpHeight * -2f * controller.Gravity);
+                    controller.Grounded = false;
+                }
+                else
+                {
+                    controller._verticalVelocity = 2;
+                }
+                controller.AddImpact((other.transform.position - transform.position).normalized, 30f);
+                controller.Grounded = false;
+               
             }
             // Add force to this target
         }
