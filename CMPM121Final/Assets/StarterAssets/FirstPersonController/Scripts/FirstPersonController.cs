@@ -68,7 +68,7 @@ public class FirstPersonController : MonoBehaviour
 
     // timeout deltatime
     private float _jumpTimeoutDelta;
-    private float _fallTimeoutDelta;
+    [HideInInspector] public float _fallTimeoutDelta;
 
     private CharacterController _controller;
     private StarterAssetsInputs _input;

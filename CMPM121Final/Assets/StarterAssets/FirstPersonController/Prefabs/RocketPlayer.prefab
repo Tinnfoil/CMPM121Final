@@ -200,7 +200,7 @@ MonoBehaviour:
   RotationSpeed: 1
   SpeedChangeRate: 10
   JumpHeight: 1.2
-  Gravity: -15
+  Gravity: -8
   JumpTimeout: 0.1
   FallTimeout: 0.15
   Grounded: 1
@@ -216,6 +216,7 @@ MonoBehaviour:
   GrappleOut: 0
   GrappleAttached: 0
   _verticalVelocity: 0
+  _fallTimeoutDelta: 0
 --- !u!114 &1978471637655604388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,7 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WarheadPrefab: {fileID: 4415564061245526691, guid: 8686b1f532eaea44992d19a6a8e391ea, type: 3}
   WarheadTransform: {fileID: 3391066368185554387}
-  cooldown: 0.25
+  cooldown: 0.5
 --- !u!114 &8616685848737228376
 MonoBehaviour:
   m_ObjectHideFlags: 0
