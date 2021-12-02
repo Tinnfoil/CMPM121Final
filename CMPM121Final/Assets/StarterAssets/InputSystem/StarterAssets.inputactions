@@ -273,6 +273,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Dead",
+            "id": "1c06cda1-44bf-4659-8cd6-a6fecd17edb4",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "fa435c75-6a84-454c-96e8-7a6b871cd4b6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ca65af54-6d5c-494b-990d-2f83582fb40d",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

@@ -46,6 +46,7 @@ public class WarheadExplosion : MonoBehaviour
                 if (controller.Grounded)
                 {
                     controller._verticalVelocity = Mathf.Sqrt(controller.JumpHeight * -2f * controller.Gravity);
+                    controller._fallTimeoutDelta = controller.FallTimeout;
                     controller.Grounded = false;
                 }
                 else
@@ -54,7 +55,6 @@ public class WarheadExplosion : MonoBehaviour
                 }
                 controller.AddImpact((other.transform.position - transform.position).normalized, 30f);
                 controller.Grounded = false;
-               
             }
             // Add force to this target
         }

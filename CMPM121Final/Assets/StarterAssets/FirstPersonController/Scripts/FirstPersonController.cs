@@ -70,8 +70,8 @@ public class FirstPersonController : MonoBehaviour
     private float _jumpTimeoutDelta;
     [HideInInspector] public float _fallTimeoutDelta;
 
-    private CharacterController _controller;
-    private StarterAssetsInputs _input;
+    [HideInInspector] public CharacterController _controller;
+    [HideInInspector] public StarterAssetsInputs _input;
     private GameObject _mainCamera;
 
     private const float _threshold = 0.01f;
