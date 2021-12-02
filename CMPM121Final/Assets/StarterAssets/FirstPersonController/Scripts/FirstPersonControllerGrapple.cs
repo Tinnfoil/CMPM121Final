@@ -70,6 +70,14 @@ namespace StarterAssets
 		public GameObject GrappleHook;
 		public GameObject GrappleCable;
 
+		public GameObject Gun;
+		public Transform BulletOrigin;
+
+		public Vector3 LookAtPoint;
+
+		public ParticleSystem MuzzleFlash;
+		public ParticleSystem BulletParticle;
+
 		// cinemachine
 		private float _cinemachineTargetPitch;
 
@@ -111,6 +119,10 @@ namespace StarterAssets
 			// grapple input actions
 			_input.OnGrappleButton += ShootGrapple;
 			_input.OnGrappleRelease += ReleaseGrapple;
+
+			// gun input actions
+			_input.OnGunButton += ShootGun;
+
 		}
 
 		private void Update()
@@ -119,6 +131,8 @@ namespace StarterAssets
 			GroundedCheck();
 
 			drag = Grounded ? 10.0f : 6.0f;
+
+			UpdateLookAtPoint();
 
 			DoGrapple();
 			Move();
@@ -140,6 +154,15 @@ namespace StarterAssets
 		private void LateUpdate()
 		{
 			CameraRotation();
+		}
+
+		private void UpdateLookAtPoint() {
+			RaycastHit hit;
+			if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out hit, Mathf.Infinity)) {
+				LookAtPoint = hit.point;
+			} else {
+				LookAtPoint = _mainCamera.transform.position + _mainCamera.transform.forward * 1000;
+			}
 		}
 
 		private void GroundedCheck()
@@ -274,6 +297,30 @@ namespace StarterAssets
 			}
 		}
 
+		private void ShootGun() {
+			Debug.Log("Shoot Gun");
+
+			if (!Gun.GetComponent<Gun>().GunReady) return;
+
+			MuzzleFlash.Play();
+
+			Gun.GetComponent<Animator>().SetTrigger("ShootGun");
+
+			RaycastHit hit;
+			if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out hit, Mathf.Infinity)) {
+				if (hit.collider) {
+					// gun hit something
+					Debug.DrawRay(BulletOrigin.position, hit.point - BulletOrigin.position, Color.red, 0.1f);
+					BulletParticle.gameObject.transform.LookAt(hit.point, Vector3.up);
+				} else {
+					// gun did not hit something
+					BulletParticle.gameObject.transform.LookAt(LookAtPoint);
+				}
+			}
+			
+			// BulletParticle.Play();
+		}
+
 		private void ShootGrapple() {
 			// shoot grapple out
 			// check if an object was hit
@@ -334,6 +381,11 @@ namespace StarterAssets
 
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
+
+			if (Vector3.Magnitude(LookAtPoint - _mainCamera.transform.position) <= 20) Gizmos.color = transparentGreen;
+			else Gizmos.color = transparentRed;
+
+			Gizmos.DrawSphere(LookAtPoint, GroundedRadius);
 		}
 	}
 }

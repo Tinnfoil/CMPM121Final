@@ -26,6 +26,8 @@ namespace StarterAssets
 		public Action OnGrappleRelease;
         public Action OnRocketButton;
 
+        public Action OnGunButton;
+
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         public void OnMove(InputValue value)
         {
@@ -59,6 +61,10 @@ namespace StarterAssets
         public void OnRocket(InputValue value)
         {
             OnRocketButton?.Invoke();
+        }
+
+        public void OnGun(InputValue value) {
+            OnGunButton?.Invoke();
         }
 #else
 	// old input sys if we do decide to have it (most likely wont)...
