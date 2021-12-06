@@ -76,6 +76,11 @@ public class FirstPersonController : MonoBehaviour
 
     private const float _threshold = 0.01f;
 
+    private bool isGrounded; // is on a slope or not
+    public float slideFriction = 0.3f; // ajusting the friction of the slope
+    private Vector3 hitNormal; //orientation of the slope.
+    private float slideGravity;
+
     private void Awake()
     {
         // get a reference to our main camera
@@ -126,6 +131,11 @@ public class FirstPersonController : MonoBehaviour
         //JumpAndGravity();
         // GroundedCheck();
         //Move();
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        hitNormal = hit.normal;
     }
 
     private void LateUpdate()
@@ -197,10 +207,24 @@ public class FirstPersonController : MonoBehaviour
         }
 
         // move the player
-        _controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime + impact * Time.deltaTime);
+        _controller.Move(inputDirection.normalized * (_speed * (Grounded || impact.magnitude == 0 ? 1 : 2) * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime + impact * Time.deltaTime);
 
         // consumes the impact energy each cycle:
         impact = Vector3.Lerp(impact, Vector3.zero, Time.deltaTime);
+
+        isGrounded = Vector3.Angle(Vector3.up, hitNormal) <= _controller.slopeLimit;
+        if (!isGrounded)
+        {
+            Vector3 m_MoveDir = new Vector3(0, 0, 0);
+            slideGravity += 9 * Time.deltaTime;
+            m_MoveDir.x += (1f - hitNormal.y) * hitNormal.x * (slideGravity - slideFriction);
+            m_MoveDir.z += (1f - hitNormal.y) * hitNormal.z * (slideGravity - slideFriction);
+            _controller.Move(m_MoveDir * Time.deltaTime);
+        }
+        else
+        {
+            slideGravity = 3;
+        }
     }
 
     private void JumpAndGravity()

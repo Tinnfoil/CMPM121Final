@@ -96,6 +96,11 @@ public class FirstPersonControllerGrapple : MonoBehaviour
 
     private const float _threshold = 0.01f;
 
+    private bool isGrounded; // is on a slope or not
+    public float slideFriction = 0.3f; // ajusting the friction of the slope
+    private Vector3 hitNormal; //orientation of the slope.
+    private float slideGravity;
+
     private void Awake()
     {
         // get a reference to our main camera
@@ -151,6 +156,11 @@ public class FirstPersonControllerGrapple : MonoBehaviour
             GrappleCable.SetActive(false);
             GrappleHook.SetActive(true);
         }
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        hitNormal = hit.normal;
     }
 
     private void LateUpdate()
@@ -250,6 +260,20 @@ public class FirstPersonControllerGrapple : MonoBehaviour
 
         // depletes grapple force every frame
         if (!GrappleAttached) GrappleForce = Vector3.MoveTowards(GrappleForce, Vector3.zero, drag * Time.deltaTime);
+
+        isGrounded = Vector3.Angle(Vector3.up, hitNormal) <= _controller.slopeLimit;
+        if (!isGrounded)
+        {
+            Vector3 m_MoveDir = new Vector3(0, 0, 0);
+            slideGravity += 9 * Time.deltaTime;
+            m_MoveDir.x += (1f - hitNormal.y) * hitNormal.x * (slideGravity - slideFriction);
+            m_MoveDir.z += (1f - hitNormal.y) * hitNormal.z * (slideGravity - slideFriction);
+            _controller.Move(m_MoveDir * Time.deltaTime);
+        }
+        else
+        {
+            slideGravity = 3;
+        }
     }
 
     private void JumpAndGravity()
