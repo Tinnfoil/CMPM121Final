@@ -213,17 +213,17 @@ public class FirstPersonController : MonoBehaviour
         impact = Vector3.Lerp(impact, Vector3.zero, Time.deltaTime);
 
         isGrounded = Vector3.Angle(Vector3.up, hitNormal) <= _controller.slopeLimit;
-        if (!isGrounded)
+        if (!isGrounded && Grounded)
         {
             Vector3 m_MoveDir = new Vector3(0, 0, 0);
-            slideGravity += 9 * Time.deltaTime;
+            slideGravity = Mathf.Clamp(slideGravity += 9 * Time.deltaTime, 3, 30);
             m_MoveDir.x += (1f - hitNormal.y) * hitNormal.x * (slideGravity - slideFriction);
             m_MoveDir.z += (1f - hitNormal.y) * hitNormal.z * (slideGravity - slideFriction);
             _controller.Move(m_MoveDir * Time.deltaTime);
         }
         else
         {
-            slideGravity = 3;
+            slideGravity = 0;
         }
     }
 
