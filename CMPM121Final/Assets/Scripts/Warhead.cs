@@ -9,6 +9,7 @@ public class Warhead : MonoBehaviour
     public GameObject WarheadVFX;
     private GameObject warheadVFXref;
     Rigidbody rb;
+    private float timeOut = 1f;
     // Start is called before the first frame update
     void Awake()
     {
@@ -19,6 +20,21 @@ public class Warhead : MonoBehaviour
     {
         warheadVFXref = Instantiate(WarheadVFX, position, rotation);
         warheadVFXref.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+        Invoke("ExplodeWarhead", timeOut);
+    }
+
+    public void ExplodeWarhead()
+    {
+        Explode(null);
+    }
+
+    public void Explode(Collision collision = null)
+    {
+        if (collision != null) { transform.position = collision.GetContact(0).point; }
+        Destroy(Instantiate(ExplosionVFX, transform.position, Quaternion.identity), 3);
+        Destroy(gameObject);
+        warheadVFXref.GetComponent<WarheadVFX>().DestroySelf();
+        Destroy(warheadVFXref);
     }
 
     // Update is called once per frame
@@ -29,11 +45,8 @@ public class Warhead : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        transform.position = collision.GetContact(0).point;
-        Destroy(Instantiate(ExplosionVFX, transform.position, Quaternion.identity), 3);
-        Destroy(gameObject);
-        warheadVFXref.GetComponent<WarheadVFX>().DestroySelf();
-        Destroy(warheadVFXref);
+        StopAllCoroutines();
+        Explode(collision);
     }
 
 }
