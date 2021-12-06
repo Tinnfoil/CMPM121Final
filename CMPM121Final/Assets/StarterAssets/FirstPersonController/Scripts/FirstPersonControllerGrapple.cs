@@ -186,6 +186,10 @@ public class FirstPersonControllerGrapple : MonoBehaviour
         // set sphere position, with offset
         Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
         Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
+        if (Grounded)
+        {
+            GrappleForce *= .99f;
+        }
     }
 
     private void CameraRotation()
@@ -400,11 +404,10 @@ public class FirstPersonControllerGrapple : MonoBehaviour
             }
 
             direction.Normalize();
-            GrappleForce += Time.deltaTime * direction.normalized * GrappleStrength / 3.0f;
 
-            if (GrappleForce.magnitude > 10f)
+            if (GrappleForce.magnitude < 300f)
             {
-                GrappleForce = GrappleForce.normalized * 10f;
+                GrappleForce += Time.deltaTime * direction.normalized * GrappleStrength / 6.0f;
             }
         }
     }
