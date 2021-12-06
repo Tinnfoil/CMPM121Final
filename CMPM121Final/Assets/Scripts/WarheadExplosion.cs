@@ -56,6 +56,10 @@ public class WarheadExplosion : MonoBehaviour
                 controller.AddImpact((other.transform.position - transform.position).normalized, 30f);
                 controller.Grounded = false;
             }
+            else if (other.GetComponentInParent<Trigger>())
+            {
+                other.GetComponentInParent<Trigger>().TriggerObject();
+            }
             // Add force to this target
         }
     }
