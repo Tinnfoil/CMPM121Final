@@ -21,6 +21,15 @@ public class WarheadExplosion : MonoBehaviour
         LeanTween.scale(explosionSphere, new Vector3(4, 4, 4), .1f);
         LeanTween.alpha(explosionSphere, 0, .2f);
         Invoke("DisableSelf", Time.deltaTime);
+
+        Collider[] collisions = Physics.OverlapSphere(transform.position, 4, ~0, QueryTriggerInteraction.Ignore);
+        foreach(Collider col in collisions)
+        {
+            if (col.GetComponentInParent<Trigger>())
+            {
+                col.GetComponentInParent<Trigger>().TriggerObject();
+            }
+        }
     }
 
     public void DisableSelf()
@@ -56,11 +65,6 @@ public class WarheadExplosion : MonoBehaviour
                 controller.AddImpact((other.transform.position - transform.position).normalized, 30f);
                 controller.Grounded = false;
             }
-            else if (other.GetComponentInParent<Trigger>())
-            {
-                other.GetComponentInParent<Trigger>().TriggerObject();
-            }
-            // Add force to this target
         }
     }
 }

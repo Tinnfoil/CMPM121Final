@@ -10,4 +10,9 @@ public class CircleDoor : Triggerable
         animator.SetTrigger("Open");
     }
 
+    public override void Reset()
+    {
+        animator.SetTrigger("Close");
+    }
+
 }

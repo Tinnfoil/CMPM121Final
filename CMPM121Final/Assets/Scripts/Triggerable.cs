@@ -8,4 +8,8 @@ public class Triggerable : MonoBehaviour, ITriggerable
     {
 
     }
+    public virtual void Reset()
+    {
+
+    }
 }

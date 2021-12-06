@@ -57,5 +57,14 @@ public class GameManager : MonoBehaviour
         }
 
         controller.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+
+        foreach(Triggerable t in FindObjectsOfType<Triggerable>())
+        {
+            t.Reset();
+        }
+        foreach (Trigger t in FindObjectsOfType<Trigger>())
+        {
+            t.Reset();
+        }
     }
 }

@@ -6,6 +6,7 @@ public class Trigger : MonoBehaviour
 {
     public Triggerable triggeredObject;
 
+    public Material[] NormalMaterials;
     public Material[] TriggeredMaterials;
 
     private bool Triggered;
@@ -18,6 +19,12 @@ public class Trigger : MonoBehaviour
         GetComponent<Animator>().SetTrigger("Spin");
 
         GetComponentInChildren<MeshRenderer>().materials = TriggeredMaterials;
+    }
+
+    public void Reset()
+    {
+        Triggered = false;
+        GetComponentInChildren<MeshRenderer>().materials = NormalMaterials;
     }
     // Start is called before the first frame update
     void Start()
