@@ -405,10 +405,7 @@ public class FirstPersonControllerGrapple : MonoBehaviour
 
             direction.Normalize();
 
-            if (GrappleForce.magnitude < 300f)
-            {
-                GrappleForce += Time.deltaTime * direction.normalized * GrappleStrength / 6.0f;
-            }
+            GrappleForce += Time.deltaTime * direction.normalized * GrappleStrength / 6.0f;
         }
     }
 
