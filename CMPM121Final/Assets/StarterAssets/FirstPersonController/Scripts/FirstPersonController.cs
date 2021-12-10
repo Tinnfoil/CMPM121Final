@@ -81,6 +81,8 @@ public class FirstPersonController : MonoBehaviour
     private Vector3 hitNormal; //orientation of the slope.
     private float slideGravity;
 
+    [HideInInspector] public bool isDead;
+
     private void Awake()
     {
         // get a reference to our main camera
@@ -120,6 +122,7 @@ public class FirstPersonController : MonoBehaviour
 
     private void Update()
     {
+        if (isDead) return;
         JumpAndGravity();
         GroundedCheck();
         Move();
@@ -282,7 +285,7 @@ public class FirstPersonController : MonoBehaviour
     {
         if (GrappleReady)
         {
-            Debug.Log("Shoot Grapple");
+            //Debug.Log("Shoot Grapple");
             GrappleReady = false;
             GrappleOut = true;
         }
@@ -290,7 +293,7 @@ public class FirstPersonController : MonoBehaviour
 
     private void ReleaseGrapple()
     {
-        Debug.Log("Release Grapple");
+        //Debug.Log("Release Grapple");
         GrappleOut = false;
         GrappleAttached = false;
         GrappleReady = true;

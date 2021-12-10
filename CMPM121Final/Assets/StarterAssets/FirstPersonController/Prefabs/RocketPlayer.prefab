@@ -79,7 +79,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5393215578589016642}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -217,6 +217,9 @@ MonoBehaviour:
   GrappleAttached: 0
   _verticalVelocity: 0
   _fallTimeoutDelta: 0
+  _controller: {fileID: 0}
+  _input: {fileID: 0}
+  slideFriction: 0.3
 --- !u!114 &1978471637655604388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,7 +422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6140292382799175997, guid: 2c6b5fbbc6b065d468a4e5a040467445, type: 3}
       propertyPath: m_CastShadows
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2c6b5fbbc6b065d468a4e5a040467445, type: 3}
       propertyPath: m_Name
@@ -443,7 +446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6688249156389499458, guid: 2c6b5fbbc6b065d468a4e5a040467445, type: 3}
       propertyPath: m_CastShadows
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c6b5fbbc6b065d468a4e5a040467445, type: 3}

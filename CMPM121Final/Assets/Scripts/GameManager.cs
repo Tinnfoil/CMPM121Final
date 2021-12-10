@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public Transform startPosition;
+    public string LevelPrompt = "Level 1";
+    public string NextSceneName = "RocketScene";
 
     private void Awake()
     {
@@ -20,8 +22,14 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    public void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+    {
+        UI.instance.SetNotification(LevelPrompt);
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +45,7 @@ public class GameManager : MonoBehaviour
     public void DieAndRestart()
     {
         UI.instance.SetDeathScreen(true);
+        FindObjectOfType<FirstPersonController>().isDead = true;
         FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("Dead");
         Invoke("ResetPlayer", 1);
     }
@@ -50,6 +59,7 @@ public class GameManager : MonoBehaviour
         if (FindObjectOfType<FirstPersonController>())
         {
             FindObjectOfType<FirstPersonController>().CinemachineCameraTarget.transform.rotation = startPosition.rotation;
+            FindObjectOfType<FirstPersonController>().isDead = false;
         }
         else if (FindObjectOfType<FirstPersonControllerGrapple>())
         {
@@ -66,5 +76,15 @@ public class GameManager : MonoBehaviour
         {
             t.Reset();
         }
+    }
+
+    public void GoToNextLevel(float delay)
+    {
+        Invoke("LoadNextScene", delay);
+    }
+
+    private void LoadNextScene()
+    {
+        SceneManager.LoadScene(NextSceneName, LoadSceneMode.Single);
     }
 }

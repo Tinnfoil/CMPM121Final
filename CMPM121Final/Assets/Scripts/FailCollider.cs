@@ -17,9 +17,15 @@ public class FailCollider : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.gameObject);
         if (other.GetComponentInParent<FirstPersonController>() || other.GetComponentInParent<FirstPersonControllerGrapple>())
         {
             GameManager.instance.DieAndRestart();
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("cool:"+ collision.collider.gameObject);
     }
 }

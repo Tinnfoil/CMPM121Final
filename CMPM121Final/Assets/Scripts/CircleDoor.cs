@@ -5,13 +5,19 @@ using UnityEngine;
 public class CircleDoor : Triggerable
 {
     public Animator animator;
+
     public override void Trigger()
     {
-        animator.SetTrigger("Open");
+        base.Trigger();
+        if (CanTrigger())
+        {
+            animator.SetTrigger("Open");
+        }
     }
 
     public override void Reset()
     {
+        base.Reset();
         animator.SetTrigger("Close");
     }
 

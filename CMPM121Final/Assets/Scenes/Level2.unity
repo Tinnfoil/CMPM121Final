@@ -2862,15 +2862,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2680106322629240936, guid: 9e359af93076ee949a1a30b0f352072b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 751.12
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 2680106322629240936, guid: 9e359af93076ee949a1a30b0f352072b, type: 3}
       propertyPath: m_LocalScale.y
-      value: 751.12
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 2680106322629240936, guid: 9e359af93076ee949a1a30b0f352072b, type: 3}
       propertyPath: m_LocalScale.z
-      value: 751.12
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 2680106322629240936, guid: 9e359af93076ee949a1a30b0f352072b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3590,6 +3590,14 @@ PrefabInstance:
     - target: {fileID: 3657365687653302113, guid: 1761a8acbc80305438b8e24e45ab1b24, type: 3}
       propertyPath: m_LocalPosition.z
       value: -10.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 3657365688636015784, guid: 1761a8acbc80305438b8e24e45ab1b24, type: 3}
+      propertyPath: LevelPrompt
+      value: Level 2 - Memories
+      objectReference: {fileID: 0}
+    - target: {fileID: 3657365688636015784, guid: 1761a8acbc80305438b8e24e45ab1b24, type: 3}
+      propertyPath: NextSceneName
+      value: Level1
       objectReference: {fileID: 0}
     - target: {fileID: 3657365688636015785, guid: 1761a8acbc80305438b8e24e45ab1b24, type: 3}
       propertyPath: m_RootOrder

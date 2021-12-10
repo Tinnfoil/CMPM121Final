@@ -9,6 +9,7 @@ public class UI : MonoBehaviour
     public static UI instance;
 
     public Image DeathBG;
+    public TextMeshProUGUI Notification;
 
     private void Awake()
     {
@@ -25,7 +26,7 @@ public class UI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        SetNotification("");
     }
 
     // Update is called once per frame
@@ -38,4 +39,19 @@ public class UI : MonoBehaviour
     {
         DeathBG.enabled = enabled;
     }
+
+    public void SetNotification(string text)
+    {
+        StopAllCoroutines();
+        Notification.GetComponent<CanvasGroup>().alpha = 0;
+        LeanTween.alphaCanvas(Notification.GetComponent<CanvasGroup>(), 1, 1).setEaseOutExpo();
+        Notification.text = text;
+        Invoke("FadeAwayText", 2);
+    }
+
+    public void FadeAwayText()
+    {
+        LeanTween.alphaCanvas(Notification.GetComponent<CanvasGroup>(), 0, 1).setEaseOutExpo();
+    }
+
 }
