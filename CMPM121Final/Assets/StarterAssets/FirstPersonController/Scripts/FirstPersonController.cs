@@ -122,7 +122,7 @@ public class FirstPersonController : MonoBehaviour
 
     private void Update()
     {
-        if (isDead) return;
+
         JumpAndGravity();
         GroundedCheck();
         Move();

@@ -54,7 +54,9 @@ public class GameManager : MonoBehaviour
     {
         UI.instance.SetDeathScreen(false);
         CharacterController controller = FindObjectOfType<CharacterController>();
-        controller.Move(startPosition.position - controller.transform.position);
+        controller.enabled = false;
+        controller.transform.position = startPosition.position;
+        controller.enabled = true;
         controller.transform.rotation = startPosition.rotation;
         if (FindObjectOfType<FirstPersonController>())
         {
