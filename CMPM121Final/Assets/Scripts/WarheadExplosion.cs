@@ -29,6 +29,12 @@ public class WarheadExplosion : MonoBehaviour
             {
                 col.GetComponentInParent<Trigger>().TriggerObject();
             }
+
+            if (col.GetComponent<Rigidbody>())
+            {
+
+                col.GetComponent<Rigidbody>().AddExplosionForce(10, transform.position, 4, 1.02f, ForceMode.Impulse);
+            }
         }
     }
 
