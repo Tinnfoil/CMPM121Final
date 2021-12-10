@@ -63,6 +63,7 @@ public class WarheadExplosion : MonoBehaviour
                     controller._verticalVelocity = Mathf.Sqrt(controller.JumpHeight * -2f * controller.Gravity);
                     controller._fallTimeoutDelta = controller.FallTimeout;
                     controller.Grounded = false;
+                    controller.launchTime = .1f;
                 }
                 else
                 {

@@ -82,6 +82,7 @@ public class FirstPersonController : MonoBehaviour
     private float slideGravity;
 
     [HideInInspector] public bool isDead;
+    [HideInInspector] public float launchTime;
 
     private void Awake()
     {
@@ -122,9 +123,15 @@ public class FirstPersonController : MonoBehaviour
 
     private void Update()
     {
-
         JumpAndGravity();
-        GroundedCheck();
+        if(launchTime <= 0)
+        {
+            GroundedCheck();
+        }
+        else
+        {
+            launchTime -= Time.deltaTime;
+        }
         Move();
 
     }
