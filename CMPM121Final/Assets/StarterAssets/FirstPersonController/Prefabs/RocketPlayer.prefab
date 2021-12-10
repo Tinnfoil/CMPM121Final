@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55919ac34a26952479f3fc91f777b2fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 4
+  MoveSpeed: 6
   SprintSpeed: 6
   RotationSpeed: 1
   SpeedChangeRate: 10
@@ -220,6 +220,7 @@ MonoBehaviour:
   _controller: {fileID: 0}
   _input: {fileID: 0}
   slideFriction: 0.3
+  isDead: 0
 --- !u!114 &1978471637655604388
 MonoBehaviour:
   m_ObjectHideFlags: 0
