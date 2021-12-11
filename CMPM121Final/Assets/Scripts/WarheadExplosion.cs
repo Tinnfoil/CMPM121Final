@@ -30,6 +30,10 @@ public class WarheadExplosion : MonoBehaviour
                 col.GetComponentInParent<Trigger>().TriggerObject();
             }
 
+            // if (col.GetComponentInParent<TriggerPlatform>()) {
+            //     col.GetComponentInParent<TriggerPlatform>().Trigger();
+            // }
+
             if (col.GetComponent<Rigidbody>())
             {
 

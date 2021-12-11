@@ -5,26 +5,26 @@ using UnityEngine;
 public class Trigger : MonoBehaviour
 {
     public Triggerable triggeredObject;
-
     public Material[] NormalMaterials;
     public Material[] TriggeredMaterials;
 
+    public bool Target = true;
     private bool Triggered;
 
     public void TriggerObject()
     {
-        if (Triggered) return;
+        if (Triggered && Target) return;
         Triggered = true;
         triggeredObject.Trigger();
-        GetComponent<Animator>().SetTrigger("Spin");
+        if (Target) GetComponent<Animator>().SetTrigger("Spin");
 
-        GetComponentInChildren<MeshRenderer>().materials = TriggeredMaterials;
+        if (Target) GetComponentInChildren<MeshRenderer>().materials = TriggeredMaterials;
     }
 
     public void Reset()
     {
         Triggered = false;
-        GetComponentInChildren<MeshRenderer>().materials = NormalMaterials;
+        if (Target) GetComponentInChildren<MeshRenderer>().materials = NormalMaterials;
     }
     // Start is called before the first frame update
     void Start()
