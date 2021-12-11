@@ -31,7 +31,10 @@ public class Warhead : MonoBehaviour
     public void Explode(Collision collision = null)
     {
         if (collision != null) { transform.position = collision.GetContact(0).point; }
-        Destroy(Instantiate(ExplosionVFX, transform.position, Quaternion.identity), 3);
+        if (!collision.collider.GetComponentInParent<BlockCollider>())
+        {
+            Destroy(Instantiate(ExplosionVFX, transform.position, Quaternion.identity), 3);
+        }
         Destroy(gameObject);
         warheadVFXref.GetComponent<WarheadVFX>().DestroySelf();
         Destroy(warheadVFXref);
