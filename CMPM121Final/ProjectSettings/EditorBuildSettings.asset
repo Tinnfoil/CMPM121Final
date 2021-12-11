@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Level1.unity
+    path: Assets/Scenes/Level3.unity
     guid: 3801bd6b56e41484180a47192b3eb30d
   - enabled: 1
     path: Assets/Scenes/GGScene Liam.unity
