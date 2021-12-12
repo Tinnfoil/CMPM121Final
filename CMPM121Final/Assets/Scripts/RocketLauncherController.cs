@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 #endif
 using StarterAssets;
+using System;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 [RequireComponent(typeof(PlayerInput))]
@@ -15,6 +16,7 @@ public class RocketLauncherController : MonoBehaviour
     public Transform WarheadTransform;
     public float cooldown = .25f;
     bool reloading = false;
+    public Action OnFire;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +41,7 @@ public class RocketLauncherController : MonoBehaviour
             warhead.GetComponent<Rigidbody>().AddForce(direction * 60, ForceMode.Impulse);
             WarheadTransform.gameObject.SetActive(false);
             Invoke("ReloadRocket", cooldown);
+            OnFire?.Invoke();
         }
         reloading = true;
     }
