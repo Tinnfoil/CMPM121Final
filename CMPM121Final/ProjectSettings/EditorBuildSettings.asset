@@ -6,13 +6,22 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Level4.unity
-    guid: 3801bd6b56e41484180a47192b3eb30d
+    path: Assets/Scenes/Level1.unity
+    guid: 3ecd5fb8e2cea4748b918d7c2415a773
   - enabled: 1
-    path: Assets/Scenes/GGScene Liam.unity
-    guid: 8d2039e83a2306843a36664b6457c1b9
+    path: Assets/Scenes/Level2.unity
+    guid: 8457f52685b5d60428c4d6f620f7de51
   - enabled: 1
     path: Assets/Scenes/Level3.unity
     guid: a25a6df5a3b60034ba4483e945bb2ff0
+  - enabled: 1
+    path: Assets/Scenes/Level4.unity
+    guid: 3801bd6b56e41484180a47192b3eb30d
+  - enabled: 1
+    path: Assets/Scenes/Level5.unity
+    guid: 118dd8eb71f55864583b6e9f6a430ffc
+  - enabled: 1
+    path: Assets/Scenes/GGScene Liam.unity
+    guid: 8d2039e83a2306843a36664b6457c1b9
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
