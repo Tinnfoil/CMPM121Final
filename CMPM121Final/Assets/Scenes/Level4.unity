@@ -8638,11 +8638,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3657365688636015784, guid: 1761a8acbc80305438b8e24e45ab1b24, type: 3}
       propertyPath: LevelPrompt
-      value: Level 3 - Wonder Wall
+      value: Level 4 - Wonder Wall
       objectReference: {fileID: 0}
     - target: {fileID: 3657365688636015784, guid: 1761a8acbc80305438b8e24e45ab1b24, type: 3}
       propertyPath: NextSceneName
-      value: Level4
+      value: Level5
       objectReference: {fileID: 0}
     - target: {fileID: 3657365688636015785, guid: 1761a8acbc80305438b8e24e45ab1b24, type: 3}
       propertyPath: m_RootOrder

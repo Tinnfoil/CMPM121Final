@@ -437,8 +437,8 @@ Transform:
   - {fileID: 1845637947}
   - {fileID: 1322747323}
   - {fileID: 2132518097}
-  - {fileID: 1417869958}
   - {fileID: 2090992865}
+  - {fileID: 1417869958}
   - {fileID: 1193285928}
   - {fileID: 716455277}
   m_Father: {fileID: 8379900263404920202}
@@ -4774,11 +4774,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3657365688636015784, guid: 1761a8acbc80305438b8e24e45ab1b24, type: 3}
       propertyPath: LevelPrompt
-      value: Level 4 - Flight
+      value: Level 2 - Flight
       objectReference: {fileID: 0}
     - target: {fileID: 3657365688636015784, guid: 1761a8acbc80305438b8e24e45ab1b24, type: 3}
       propertyPath: NextSceneName
-      value: Level5
+      value: Level3
       objectReference: {fileID: 0}
     - target: {fileID: 3657365688636015785, guid: 1761a8acbc80305438b8e24e45ab1b24, type: 3}
       propertyPath: m_RootOrder
