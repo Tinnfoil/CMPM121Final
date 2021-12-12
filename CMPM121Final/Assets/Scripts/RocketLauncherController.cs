@@ -54,7 +54,7 @@ public class RocketLauncherController : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        bool detectedObject = Physics.Raycast(ray, out hit, 50, ~0, QueryTriggerInteraction.Ignore);
+        bool detectedObject = Physics.Raycast(ray, out hit, 100, ~0, QueryTriggerInteraction.Ignore);
         Vector3 direction = Camera.main.transform.forward;
         if (detectedObject)
         {
