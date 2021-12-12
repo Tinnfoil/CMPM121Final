@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            instance.LevelPrompt = LevelPrompt;
+            instance.NextSceneName = NextSceneName;
             Destroy(gameObject);
         }
 
