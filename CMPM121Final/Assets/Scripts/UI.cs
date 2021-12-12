@@ -37,7 +37,7 @@ public class UI : MonoBehaviour
 
     public void SetDeathScreen(bool enabled)
     {
-        DeathBG.enabled = enabled;
+        DeathBG.gameObject.SetActive(enabled);
     }
 
     public void SetNotification(string text)
